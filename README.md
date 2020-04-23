@@ -31,7 +31,7 @@ dependencies {
   
   	
   
-  在注意因为要没有内存泄漏是只能在继承于FragmentActivity里activity里使用,Activity一被回收请求自动释放
+  在注意因为要没有内存泄漏，Activity必须继是FragmentActivity的子类,在任何的地方调用都可以,Activity一被回收请求自动释放资源
   
   请求方式如下:
   模拟网页搜索引擎的请求:
@@ -62,7 +62,7 @@ dependencies {
    
   
   其中enc是网页的编码
-  这样就能获取到网页搜索里的内容
+  这样就能获取到网页搜索里的内容，再用jsoup爬取内容
   
   json请求
 ```
