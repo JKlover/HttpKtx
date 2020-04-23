@@ -71,9 +71,11 @@ internal object NetAppWatcher {
             }
 
             override fun onActivityStarted(activity: Activity) {
-            }
 
+            }
             override fun onActivityDestroyed(activity: Activity) {
+                //取消在该Activity所有的OkHttp内部的线程请求
+                Http.cancelHttpJop(activity.javaClass.name)
             }
 
             override fun onActivitySaveInstanceState(activity: Activity, outState: Bundle) {

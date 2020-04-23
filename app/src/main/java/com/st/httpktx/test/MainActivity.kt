@@ -20,5 +20,8 @@ class MainActivity : AppCompatActivity() {
         btn2.setOnClickListener {
             startActivity<JsonActivity>()
         }
+        btn3.setOnClickListener {
+            HttpDialog(this).show()
+        }
     }
 }

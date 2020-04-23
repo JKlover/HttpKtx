@@ -1,9 +1,11 @@
 package com.st.httpktx
 
+import android.util.Log
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleObserver
 import androidx.lifecycle.OnLifecycleEvent
 import kotlinx.coroutines.Job
+import okhttp3.OkHttpClient
 
 /**
  * code bt St on 2020/3/4

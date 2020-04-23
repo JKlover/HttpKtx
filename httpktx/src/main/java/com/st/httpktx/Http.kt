@@ -6,6 +6,7 @@ import com.alibaba.fastjson.JSONObject
 import com.st.httpktx.utils.StreamTools
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.withContext
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.RequestBody.Companion.toRequestBody
@@ -57,7 +58,6 @@ inline fun <reified T> httpJsonEngine(http: BaseRequest<T>.() -> Unit) {
             } else {//抓取异常的接口
                 httpCore.mFail("接口异常")
             }
-
         } catch (e: Exception) {
             httpCore.mFail("异常")
         }
@@ -85,6 +85,8 @@ fun httpHtmlEngine(http: HttpString.() -> Unit) {
                     var b=response.body!!.byteStream()
                     return@withContext  StreamTools.getInstance().getInputStreamToStringWithEnc(b,httpCore.enc)
                 }
+//                Log.e("ST--->","我还存在")
+//                delay(8000)
                 httpCore.mSuccess(body)
             } else {//抓取异常的接口
                 httpCore.mFail("接口异常")

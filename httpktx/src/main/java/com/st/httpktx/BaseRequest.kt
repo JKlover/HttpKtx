@@ -10,7 +10,6 @@ open class BaseRequest<T> {
     var url: String? = null
     var method: String? = null
     var body: RequestBody? = null
-    var tag: Any? = null
     var postRequest: Any? = null
     var mParams: MutableMap<String, String> = mutableMapOf()
     var mHeaders: MutableMap<String, String> = mutableMapOf()

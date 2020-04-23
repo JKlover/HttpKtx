@@ -46,6 +46,7 @@ object Http {
             if (any == call.request().tag()) {
                 call.cancel()
             }
+
         }
         for (call in getOkHttpclient()!!.dispatcher.runningCalls()) {
             if (any == call.request().tag()) {
@@ -60,8 +61,8 @@ object Http {
  * 异步OkHttp请求,非阻塞
  */
 suspend fun responseHandler(http: BaseRequest<*>) = withContext(Dispatchers.IO) {
-    //          onJsonAsyncExecute(http)
-    onJsonExecute(http)!!
+              onJsonAsyncExecute(http)
+//    onJsonExecute(http)!!
 }
 
 /**
@@ -86,17 +87,17 @@ private fun request(wrap: BaseRequest<*>): Request? {
     when (wrap.method) {
         "get", "Get", "GET" -> req =
             Request.Builder().url(wrap.url.toString()).headers(setRequestHeaders(wrap.mHeaders))
-                .tag(wrap.tag).build()
+                .tag(MyAcManager.getInstance().currentActivity.javaClass.name).build()
         "post", "Post", "POST" -> req =
             Request.Builder().url(wrap.url.toString()).headers(setRequestHeaders(wrap.mHeaders))
-        .post(wrap.body!!).tag(wrap.tag).build()
+        .post(wrap.body!!).tag(MyAcManager.getInstance().currentActivity.javaClass.name).build()
         "put", "Put", "PUT" -> req = Request.Builder().url(wrap.url.toString()).put(wrap.body!!)
-            .headers(setRequestHeaders(wrap.mHeaders)).tag(wrap.tag).build()
+            .headers(setRequestHeaders(wrap.mHeaders)).tag(MyAcManager.getInstance().currentActivity.javaClass.name).build()
         "delete", "Delete", "DELETE" -> req =
             Request.Builder().url(wrap.url.toString()).headers(setRequestHeaders(wrap.mHeaders))
-                .delete(wrap.body).tag(wrap.tag).build()
+                .delete(wrap.body).tag(MyAcManager.getInstance().currentActivity.javaClass.name).build()
         else->Request.Builder().url(wrap.url.toString()).headers(setRequestHeaders(wrap.mHeaders))
-            .tag(wrap.tag).build()
+            .tag(MyAcManager.getInstance().currentActivity.javaClass.name).build()
     }
     return req
 }

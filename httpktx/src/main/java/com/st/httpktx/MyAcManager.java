@@ -11,20 +11,14 @@ import java.lang.ref.WeakReference;
  */
 
 public class MyAcManager {
-
     private static MyAcManager sInstance = new MyAcManager();
-
     private WeakReference<FragmentActivity> sCurrentActivityWeakRef;
-
-
     private MyAcManager() {
 
     }
-
     public static MyAcManager getInstance() {
         return sInstance;
     }
-
     public FragmentActivity getCurrentActivity() {
         FragmentActivity currentActivity = null;
         if (sCurrentActivityWeakRef != null) {
