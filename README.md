@@ -21,7 +21,7 @@ allprojects {
 	
 ```
 dependencies {
-	        implementation 'com.github.JKlover:X:1.0.0'
+	        implementation 'com.github.JKlover:HttpKtx:v1.0.0'
 	}
 ```
 	
@@ -68,6 +68,7 @@ dependencies {
 ```
   httpJsonEngine<ResponseEntity> {
             url="https://api.apiopen.top/getSingleJoke?sid=28654780"
+	    method="get"
             onStart{
 
             }
