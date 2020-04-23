@@ -1,0 +1,16 @@
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    package="com.st.httpktx">
+
+    <uses-permission
+        android:name="android.permission.PACKAGE_USAGE_STATS"
+        tools:ignore="ProtectedPermissions"></uses-permission>
+    <application>
+        <!--全局内容提供者-->
+        <provider
+            android:name=".InitContentProvider"
+            android:authorities="${applicationId}.net-init-provider"
+            android:exported="false"
+            android:multiprocess="true"></provider>
+    </application>
+</manifest>
