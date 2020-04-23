@@ -31,7 +31,7 @@ object Http {
         client = OkHttpClient.Builder()
             .addInterceptor(HttpLogInterceptor())
             .connectTimeout(60, TimeUnit.SECONDS)
-            .writeTimeout(10, TimeUnit.SECONDS)
+            .writeTimeout(30, TimeUnit.SECONDS)
             .readTimeout(30, TimeUnit.SECONDS)
             .build()
         postRequestBase = requestConfig.postRequestBase
@@ -58,11 +58,11 @@ object Http {
 }
 
 /**
- * 异步OkHttp请求,非阻塞
+ * 挂起函数
  */
 suspend fun responseHandler(http: BaseRequest<*>) = withContext(Dispatchers.IO) {
-              onJsonAsyncExecute(http)
-//    onJsonExecute(http)!!
+//  onJsonAsyncExecute(http)//异步OkHttp请求,非阻塞感觉速度慢
+    onJsonExecute(http)!!//同步阻塞感觉速度快很多
 }
 
 /**
