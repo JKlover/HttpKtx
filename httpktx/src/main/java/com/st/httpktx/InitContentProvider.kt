@@ -64,6 +64,7 @@ internal object NetAppWatcher {
     fun init(application: Application) {
         Http.init(
             RequestConfig.newBuilder(application)
+                .basePostRequest(BaseReq())
                 .build()
         )
         application.registerActivityLifecycleCallbacks(object : ActivityLifecycleCallbacks {

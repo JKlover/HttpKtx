@@ -3,6 +3,7 @@ package com.st.httpktx
 import android.content.Context
 import android.util.Log
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.withContext
 import okhttp3.*
 import java.net.URLEncoder
@@ -33,6 +34,8 @@ object Http {
             .connectTimeout(60, TimeUnit.SECONDS)
             .writeTimeout(30, TimeUnit.SECONDS)
             .readTimeout(30, TimeUnit.SECONDS)
+            .sslSocketFactory(NetUtils.createSSLSocketFactory(), NetUtils.TrustAllManager())
+            .hostnameVerifier(NetUtils.TrustAllHostnameVerifier())
             .build()
         postRequestBase = requestConfig.postRequestBase
     }
@@ -61,8 +64,9 @@ object Http {
  * 挂起函数
  */
 suspend fun responseHandler(http: BaseRequest<*>) = withContext(Dispatchers.IO) {
-//  onJsonAsyncExecute(http)//异步OkHttp请求,非阻塞感觉速度慢
-    onJsonExecute(http)!!//同步阻塞感觉速度快很多
+    Log.e("ST线程名字--->", Thread.currentThread().name)
+    onJsonAsyncExecute(http)//异步OkHttp请求,非阻塞感觉速度慢
+//    onJsonExecute(http)!!//同步阻塞感觉速度快很多
 }
 
 /**
@@ -83,7 +87,7 @@ suspend fun onJsonAsyncExecute(wrap: BaseRequest<*>): Response {
 
 private fun request(wrap: BaseRequest<*>): Request? {
     var req: Request? = null
-    Log.e("ST--->post",wrap.body.toString())
+    Log.e("ST--->post",wrap.method)
     when (wrap.method) {
         "get", "Get", "GET" -> req =
             Request.Builder().url(wrap.url.toString()).headers(setRequestHeaders(wrap.mHeaders))
@@ -138,7 +142,7 @@ fun setRequestHeaders(headParams: Map<String, String>): Headers {
         while (iterator.hasNext()) {
             key = iterator.next()
             headers.add(key, headParams.getValue(key))
-            Log.e("post http", "post_Params===" + key + "====" + headParams[key])
+//            Log.e("post http", "post_Params===" + key + "====" + headParams[key])
         }
     }
     return headers.build()

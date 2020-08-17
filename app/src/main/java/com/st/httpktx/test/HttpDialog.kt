@@ -28,14 +28,17 @@ class HttpDialog constructor(context: Context) : Dialog(context, R.style.push_an
     }
 
     private fun initView() {
-
-        httpJsonEngine<ResponseEntity> {
-            url = "https://api.apiopen.top/getSingleJoke?sid=28654780"
-            method = "get"
+        httpHtmlEngine {
+            url = "https://www.jjmj.tv/mjplay/6424-1-1.html"
+            method="get"
+            headers{
+                "user-agent"-"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/81.0.4044.129 Safari/537.36 Edg/81.0.416.68"
+            }
             onStart {
             }
             onSuccess {
                 tvDialog.text = it.toString()
+                println(it)
             }
             onFail {
 

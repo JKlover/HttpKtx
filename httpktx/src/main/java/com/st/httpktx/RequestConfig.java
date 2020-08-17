@@ -36,7 +36,6 @@ public  class RequestConfig {
     public static class Builder {
         private Context context;
         private Object postRequestBase;
-
         private Builder(Context context) {
             this.context = context.getApplicationContext();
         }
